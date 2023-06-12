@@ -71,6 +71,6 @@ func registerGateway(r *server.Hertz) {
 		}
 
 		handler.SvcMap[svcName] = cli
-		r.POST("/:svc", handler.Gateway)
 	}
+	r.POST("/:svc", handler.Gateway)
 }
