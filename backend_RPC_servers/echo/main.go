@@ -4,14 +4,14 @@ import (
 	"log"
 	"net"
 
+	echo "github.com/phiphi-tan/orbital-api-gateway/kitex_gen/echo/echo"
+
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/registry-nacos/registry"
-	echo "github.com/phiphi-tan/orbital-api-gateway/kitex_gen/echo/echo"
 )
 
 func main() {
-
 	r, err := registry.NewDefaultNacosRegistry()
 	if err != nil {
 		log.Println("Nacos Registry error:", err)
@@ -28,5 +28,4 @@ func main() {
 	} else {
 		log.Println("server stopped")
 	}
-
 }

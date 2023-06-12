@@ -61,6 +61,7 @@ func Gateway(ctx context.Context, c *app.RequestContext) {
 	}
 
 	//Generic Call
+	fmt.Println("Attempting Generic Call")
 	resp, err := cli.GenericCall(ctx, "", customReq)
 	respMap := make(map[string]interface{})
 	//Generic call error handling

@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -71,6 +72,7 @@ func registerGateway(r *server.Hertz) {
 		}
 
 		handler.SvcMap[svcName] = cli
+		fmt.Println(svcName)
 	}
 	r.POST("/:svc", handler.Gateway)
 }
