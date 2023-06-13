@@ -39,8 +39,11 @@ start system with run.bat
 > Verify that all services (echo, mathsvc, echosvc) are registered on Nacos by visiting [this page](http://127.0.0.1:8848/nacos) and looking under *Service Management*
 
 **<h3>Testing System:</h3>**
+
 The current Hertz gateway responds to HTTP POST requests
+
 3 RPC services are included: echo, mathsvc, timesvc
+
 Services can be accessed through /echo, /mathsvc, /timesvc and parameters are sent through a http form (to be changed to JSON)
 
 **Methods and Parameters**
