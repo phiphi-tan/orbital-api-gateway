@@ -29,9 +29,11 @@ This system was built to run on windows
 > root directory is ```orbital-api-gateway```.
 
 **Installing Nacos**
+
 Install nacos [here](https://github.com/alibaba/nacos/releases) and extract it into the root directory
 
 **Starting System**
+
 start system with run.bat
 
 > Verify that all services (echo, mathsvc, echosvc) are registered on Nacos by visiting [this page](http://127.0.0.1:8848/nacos) and looking under *Service Management*
