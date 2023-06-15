@@ -15,6 +15,7 @@ import (
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/client/genericclient"
 	"github.com/cloudwego/kitex/pkg/generic"
+	"github.com/cloudwego/kitex/pkg/loadbalance"
 	"github.com/cloudwego/kitex/pkg/transmeta"
 	"github.com/cloudwego/kitex/transport"
 	"github.com/kitex-contrib/registry-nacos/resolver"
@@ -68,6 +69,9 @@ func registerClients() {
 			hlog.Fatal(err)
 		}
 
+		//LoadBalancer
+		lb := loadbalance.NewWeightedRoundRobinBalancer()
+
 		//Initialising JSON client
 		cli, err := genericclient.NewClient(
 			svcName,
@@ -75,6 +79,7 @@ func registerClients() {
 			client.WithResolver(nacosResolver),
 			client.WithTransportProtocol(transport.TTHeader),
 			client.WithMetaHandler(transmeta.ClientTTHeaderHandler),
+			client.WithLoadBalancer(lb),
 		)
 		if err != nil {
 			hlog.Fatal(err)
