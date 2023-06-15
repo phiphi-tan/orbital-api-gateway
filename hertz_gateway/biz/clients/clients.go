@@ -14,7 +14,6 @@ import (
 
 	"github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/errors"
 	"github.com/phiphi-tan/orbital-api-gateway/kitex_gen/common"
-	"github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/types"
 )
 
 var SvcMap = make(map[string]genericclient.Client)
@@ -32,16 +31,14 @@ func GenericCall(svc string, method string,
 
 	//Generic call error handling
 	if err != nil {
-		respMap := make(map[string]interface{})
 		hlog.Errorf("GenericCall err:%v", err)
 		bizErr, ok := kerrors.FromBizStatusError(err)
 		if !ok {
 			c.JSON(http.StatusOK, errors.New(common.Err_ServerHandleFail))
 			return
 		}
-		respMap[types.ResponseErrCode] = bizErr.BizStatusCode()
-		respMap[types.ResponseErrMessage] = bizErr.BizMessage()
-		c.JSON(http.StatusOK, respMap)
+		resp = errors.Err{ErrCode: int64(bizErr.BizStatusCode()), ErrMsg: bizErr.BizMessage()}
+		c.JSON(http.StatusOK, resp)
 		return
 	}
 
