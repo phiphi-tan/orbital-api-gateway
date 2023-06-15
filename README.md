@@ -40,31 +40,31 @@ start system with run.bat
 
 **<h3>Testing System:</h3>**
 
-The current Hertz gateway responds to HTTP POST requests
+The current Hertz gateway responds to HTTP POST requests with a JSON body
 
 3 RPC services are included: echo, mathsvc, timesvc
 
-Services can be accessed through /echo, /mathsvc, /timesvc and parameters are sent through a http form (to be changed to JSON)
+Services can be accessed through ```/:service/:method```
 
 **Methods and Parameters**
 
 echo:
-| method | biz_params |
-| ------ | ---------- |
-| echo   | message    |
+| method | params           |
+| ------ | ---------------- |
+| echo   | message (string) |
 
 mathsvc:
-| method   | biz_params    |
-| -------- | ------------- |
-| add      | first, second |
-| subtract | first, second |
-| multiply | first, second |
+| method   | params                          |
+| -------- | ------------------------------- |
+| add      | first (number), second (number) |
+| subtract | first (number), second (number) |
+| multiply | first (number), second (number) |
 
 timesvc:
-| method | biz_params          |
-| ------ | ------------------- |
-| time   | twentyfourhour      |
-| date   | american_formatting |
+| method | biz_params                    |
+| ------ | ----------------------------- |
+| time   | twentyfourhour (boolean)      |
+| date   | american_formatting (boolean) |
 
 **<h3>Timeline:</h3>**
 
@@ -87,6 +87,51 @@ timesvc:
 - Service Discovery
 - Generic Call
 
+*15/06/23*: Finished implementation of
+- JSON request handling
+- Parameter Validation
+- Weighted Load Balancer
+
+**Curl Commands for Testing**
+
+Echo:
+```shell
+curl --location --request POST 'http://127.0.0.1/echo/echo' --header 'Content-Type: application/json' --data '{"message": "Hello World!"}'
+```
+
+MathSvc:
+```shell
+curl --location --request POST 'http://172.19.80.1/mathsvc/add' --header 'Content-Type: application/json' --data '{"first": 1, "second": 2}'
+```
+
+TimeSvc:
+```shell
+curl --location --request POST 'http://172.19.80.1/timesvc/time' --header 'Content-Type: application/json' --data '{"twentyfourhour": true}'
+```
+**<h3>Adding/Updating IDLs:</h3>**
+
+Add your IDL files under '/idl' directory. View [IDL annotation standards](https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic-call/thrift_idl_annotation_standards/).
+Note: the name of your IDL file should be the same as the name of your service
+
+**Hertz Scaffolding**
+Under `/hertz_gateway` run these commands to generate/update hertz scaffolding for your IDL
+```shell
+hz update -module "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway" -idl ../idl/[IDL file]
+```
+Update handler logic in `hertz_gateway/handler/[Service Name
+
+**Kitex Scaffolding**
+Under the root directory, run these commands to generate kitex code for your IDL
+```shell
+kitex -module "github.com/phiphi-tan/orbital-api-gateway" ../idl/[IDL file]
+```
+
+**Kitex RPC Servers**
+If you would like to generate a server for your RPC server under this directory, run this command under `/backend_RPC_servers`
+```shell
+kitex -module "github.com/phiphi-tan/orbital-api-gateway/backend_RPC_server" -service [Service Name] ../idl/[IDL file]
+```
+Under run.bat, include a run command for your newly generated RPC server
 
 \
 Quote of the day:
