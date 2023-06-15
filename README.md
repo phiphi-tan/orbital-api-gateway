@@ -19,7 +19,7 @@ servers.
 instructions.
 ___
 
-**<h3>System Design:</h3>**
+**<h2>System Design:</h2>**
 
 ![image](https://github.com/phiphi-tan/orbital-api-gateway/assets/103935416/7c8e00ef-eaea-4f5d-acc3-b52bd9eed8f9)
 
@@ -37,8 +37,9 @@ Install nacos [here](https://github.com/alibaba/nacos/releases) and extract it i
 start system with run.bat
 
 > Verify that all services (echo, mathsvc, echosvc) are registered on Nacos by visiting [this page](http://127.0.0.1:8848/nacos) and looking under *Service Management*
+___
 
-**<h3>Testing System:</h3>**
+**<h2>Testing System:</h2>**
 
 The current Hertz gateway responds to HTTP POST requests with a JSON body
 
@@ -65,8 +66,9 @@ timesvc:
 | ------ | ----------------------------- |
 | time   | twentyfourhour (boolean)      |
 | date   | american_formatting (boolean) |
+___
 
-**<h3>Timeline:</h3>**
+**<h2>Timeline:</h2>**
 
 *13/05/23*: Made the Github Repo and this cool looking `.md` file
 - attended workshops too
@@ -91,8 +93,8 @@ timesvc:
 - JSON request handling
 - Parameter Validation
 - Weighted Load Balancer
-
-**Curl Commands for Testing**
+___
+**<h2>Curl Commands for Testing</h2>**
 
 Echo:
 ```shell
@@ -108,7 +110,9 @@ TimeSvc:
 ```shell
 curl --location --request POST 'http://172.19.80.1/timesvc/time' --header 'Content-Type: application/json' --data '{"twentyfourhour": true}'
 ```
-**<h3>Adding/Updating IDLs:</h3>**
+___
+
+**<h2>Adding/Updating IDLs:</h2>**
 
 Add your IDL files under '/idl' directory. View [IDL annotation standards](https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic-call/thrift_idl_annotation_standards/).
 Note: the name of your IDL file should be the same as the name of your service
@@ -132,7 +136,7 @@ If you would like to generate a server for your RPC server under this directory,
 kitex -module "github.com/phiphi-tan/orbital-api-gateway/backend_RPC_server" -service [Service Name] ../idl/[IDL file]
 ```
 Under run.bat, include a run command for your newly generated RPC server
-
+___
 \
 Quote of the day:
 >There's 104 days of summer vacation. And school comes along just to end it
