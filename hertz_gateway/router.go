@@ -35,31 +35,40 @@ func registerGateway(r *server.Hertz) {
 	if handler.SvcMap == nil {
 		handler.SvcMap = make(map[string]genericclient.Client)
 	}
+
+	//Setting IDL Path
 	idlPath := "./idl/"
 	c, err := os.ReadDir(idlPath)
 	if err != nil {
 		hlog.Fatalf("new thrift file provider failed: %v", err)
 	}
+
+	//Using Nacos Resolver for clients
 	nacosResolver, err := resolver.NewDefaultNacosResolver()
 	if err != nil {
 		hlog.Fatalf("err:%v", err)
 	}
 
+	//loop to initialise JSON client for each service
 	for _, entry := range c {
+
 		if entry.IsDir() || entry.Name() == "common.thrift" {
 			continue
 		}
 		svcName := strings.ReplaceAll(entry.Name(), ".thrift", "")
-
+		//Providing IDL File
 		provider, err := generic.NewThriftFileProvider(entry.Name(), idlPath)
 		if err != nil {
 			hlog.Fatalf("new thrift file provider failed: %v", err)
 			break
 		}
-		g, err := generic.HTTPThriftGeneric(provider)
+		//Generic interface
+		g, err := generic.JSONThriftGeneric(provider)
 		if err != nil {
 			hlog.Fatal(err)
 		}
+
+		//Initialising client
 		cli, err := genericclient.NewClient(
 			svcName,
 			g,
@@ -71,8 +80,9 @@ func registerGateway(r *server.Hertz) {
 			hlog.Fatal(err)
 		}
 
+		//Adding clients to SvcMap
 		handler.SvcMap[svcName] = cli
-		fmt.Println(svcName)
+		fmt.Println("Client Generated for ", svcName)
 	}
-	r.POST("/:svc", handler.Gateway)
+	r.POST("/:svc/:method", handler.Gateway)
 }

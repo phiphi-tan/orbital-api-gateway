@@ -17,10 +17,15 @@ func main() {
 		log.Println("Nacos Registry error:", err)
 	}
 
+	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8003")
+	if err != nil {
+		panic(err)
+	}
+
 	svr := timesvc.NewServer(new(TimeSvcImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "timesvc"}),
 		server.WithRegistry(r),
-		server.WithServiceAddr(&net.TCPAddr{Port: 8003}),
+		server.WithServiceAddr(addr),
 	)
 
 	if err := svr.Run(); err != nil {

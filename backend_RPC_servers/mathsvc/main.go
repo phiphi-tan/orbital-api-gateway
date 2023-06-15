@@ -17,10 +17,15 @@ func main() {
 		log.Println("Nacos Registry error:", err)
 	}
 
+	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8002")
+	if err != nil {
+		panic(err)
+	}
+
 	svr := mathsvc.NewServer(new(MathSvcImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "mathsvc"}),
 		server.WithRegistry(r),
-		server.WithServiceAddr(&net.TCPAddr{Port: 8002}),
+		server.WithServiceAddr(addr),
 	)
 
 	if err := svr.Run(); err != nil {
