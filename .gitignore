@@ -1,2 +1,5 @@
 nacos/
 derby.log/
+cache/
+work/
+logs/

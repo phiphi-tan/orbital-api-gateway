@@ -1,7 +1,7 @@
 namespace go timesvc
 
 struct TimeReq {
-    1: bool twentyfourhour,
+    1: required bool twentyfourhour,
 }
 
 struct TimeResp {
@@ -9,7 +9,7 @@ struct TimeResp {
 }
 
 struct DateReq {
-     1: bool american_formatting,
+     1: required bool american_formatting,
 }
 
 struct DateResp {
