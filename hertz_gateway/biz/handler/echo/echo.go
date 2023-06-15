@@ -4,14 +4,11 @@ package echo
 
 import (
 	"context"
-	"net/http"
 
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	clients "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/clients"
 	echo "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/model/echo"
-
-	"github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/errors"
-	"github.com/phiphi-tan/orbital-api-gateway/kitex_gen/common"
 )
 
 // Echo .
@@ -23,9 +20,7 @@ func Echo(ctx context.Context, c *app.RequestContext) {
 	var req echo.Request
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		resp := errors.New(common.Err_MissingParameters)
-		resp.ErrMsg = err.Error()
-		c.JSON(http.StatusOK, resp)
+		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
 
