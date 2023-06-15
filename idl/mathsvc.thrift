@@ -1,18 +1,18 @@
 namespace go mathsvc
 
 struct AddRequest {
-	1: double first
-	2: double second
+	1: required double first
+	2: required double second
 }
 
 struct SubtractRequest {
-	1: double first
-	2: double second
+	1: required double first
+	2: required double second
 }
 
 struct MultiplyRequest {
-	1: double first
-	2: double second
+	1: required double first
+	2: required double second
 }
 
 struct AddResponse {

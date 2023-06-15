@@ -16,12 +16,9 @@ import (
 // Register register routes based on the IDL 'api.${HTTP Method}' annotation.
 func Register(r *server.Hertz) {
 
-<<<<<<< Updated upstream
-=======
 	root := r.Group("/", rootMw()...)
 	{
 		_echo := root.Group("/echo", _echoMw()...)
 		_echo.POST("/echo", append(_echo0Mw(), echo.Echo)...)
 	}
->>>>>>> Stashed changes
 }

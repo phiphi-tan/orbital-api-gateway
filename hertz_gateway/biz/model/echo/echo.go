@@ -9,11 +9,7 @@ import (
 )
 
 type Request struct {
-<<<<<<< Updated upstream
-	Message string `thrift:"message,1" form:"message,required" json:"message,required"`
-=======
 	Message string `thrift:"message,1,required" form:"message,required" json:"message,required" query:"message,required"`
->>>>>>> Stashed changes
 }
 
 func NewRequest() *Request {
@@ -32,10 +28,7 @@ func (p *Request) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
-<<<<<<< Updated upstream
-=======
 	var issetMessage bool = false
->>>>>>> Stashed changes
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -56,10 +49,7 @@ func (p *Request) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
-<<<<<<< Updated upstream
-=======
 				issetMessage = true
->>>>>>> Stashed changes
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -79,13 +69,10 @@ func (p *Request) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
-<<<<<<< Updated upstream
-=======
 	if !issetMessage {
 		fieldId = 1
 		goto RequiredFieldNotSetError
 	}
->>>>>>> Stashed changes
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -100,11 +87,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-<<<<<<< Updated upstream
-=======
 RequiredFieldNotSetError:
 	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_Request[fieldId]))
->>>>>>> Stashed changes
 }
 
 func (p *Request) ReadField1(iprot thrift.TProtocol) error {

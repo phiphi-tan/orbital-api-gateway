@@ -18,7 +18,7 @@ import (
 	"github.com/cloudwego/kitex/pkg/transmeta"
 	"github.com/cloudwego/kitex/transport"
 	"github.com/kitex-contrib/registry-nacos/resolver"
-	handler "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/handler"
+	clients "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/clients"
 )
 
 // customizeRegister registers customize routers.
@@ -27,14 +27,10 @@ func customizedRegister(r *server.Hertz) {
 		c.JSON(http.StatusOK, "hertz-gateway is running")
 	})
 
-	registerGateway(r)
+	registerClients()
 }
 
-func registerGateway(r *server.Hertz) {
-
-	if handler.SvcMap == nil {
-		handler.SvcMap = make(map[string]genericclient.Client)
-	}
+func registerClients() {
 
 	//Setting IDL Path
 	idlPath := "./idl/"
@@ -50,6 +46,9 @@ func registerGateway(r *server.Hertz) {
 	}
 
 	//loop to initialise JSON client for each service
+	if clients.SvcMap == nil {
+		clients.SvcMap = make(map[string]genericclient.Client)
+	}
 	for _, entry := range c {
 
 		if entry.IsDir() || entry.Name() == "common.thrift" {
@@ -62,13 +61,14 @@ func registerGateway(r *server.Hertz) {
 			hlog.Fatalf("new thrift file provider failed: %v", err)
 			break
 		}
+
 		//Generic interface
 		g, err := generic.JSONThriftGeneric(provider)
 		if err != nil {
 			hlog.Fatal(err)
 		}
 
-		//Initialising client
+		//Initialising JSON client
 		cli, err := genericclient.NewClient(
 			svcName,
 			g,
@@ -81,8 +81,7 @@ func registerGateway(r *server.Hertz) {
 		}
 
 		//Adding clients to SvcMap
-		handler.SvcMap[svcName] = cli
+		clients.SvcMap[svcName] = cli
 		fmt.Println("Client Generated for ", svcName)
 	}
-	r.POST("/:svc/:method", handler.Gateway)
 }

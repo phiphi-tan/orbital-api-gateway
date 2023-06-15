@@ -7,9 +7,6 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-<<<<<<< Updated upstream
-)
-=======
 	clients "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/clients"
 	echo "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway/biz/model/echo"
 )
@@ -29,4 +26,3 @@ func Echo(ctx context.Context, c *app.RequestContext) {
 
 	clients.GenericCall("echo", "echo", ctx, c)
 }
->>>>>>> Stashed changes

@@ -1,7 +1,7 @@
 namespace go echo
 
 struct Request {
-	1: string message (api.body = "message,required")
+	1: required string message
 }
 
 struct Response {
@@ -9,5 +9,5 @@ struct Response {
 }
 
 service Echo {
-    Response echo(1: Request req)
+    Response echo(1: Request req)( api.post = '/echo/echo', api.param = 'true')
 }

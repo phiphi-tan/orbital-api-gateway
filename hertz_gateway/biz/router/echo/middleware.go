@@ -5,8 +5,6 @@ package echo
 import (
 	"github.com/cloudwego/hertz/pkg/app"
 )
-<<<<<<< Updated upstream
-=======
 
 func rootMw() []app.HandlerFunc {
 	// your code...
@@ -22,4 +20,3 @@ func _echo0Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
->>>>>>> Stashed changes
