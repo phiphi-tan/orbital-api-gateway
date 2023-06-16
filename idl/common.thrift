@@ -7,8 +7,9 @@ enum Err
 	Unauthorized          = 10002,
 	ServerNotFound        = 10003,
 	ServerMethodNotFound  = 10004,
-	RequestServerFail     = 10005,
-	ServerHandleFail      = 10006,
-	ResponseUnableParse   = 10007,
+	MissingParameters     = 10005,
+	RequestServerFail     = 10006,
+	ServerHandleFail      = 10007,
+	ResponseUnableParse   = 10008,
 
 }

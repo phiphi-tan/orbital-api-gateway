@@ -9,8 +9,8 @@ import (
 )
 
 type AddRequest struct {
-	First  float64 `thrift:"first,1" frugal:"1,default,double" json:"first"`
-	Second float64 `thrift:"second,2" frugal:"2,default,double" json:"second"`
+	First  float64 `thrift:"first,1,required" frugal:"1,required,double" json:"first"`
+	Second float64 `thrift:"second,2,required" frugal:"2,required,double" json:"second"`
 }
 
 func NewAddRequest() *AddRequest {
@@ -44,6 +44,8 @@ func (p *AddRequest) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
+	var issetFirst bool = false
+	var issetSecond bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -64,6 +66,7 @@ func (p *AddRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetFirst = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -74,6 +77,7 @@ func (p *AddRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetSecond = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -93,6 +97,15 @@ func (p *AddRequest) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
+	if !issetFirst {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetSecond {
+		fieldId = 2
+		goto RequiredFieldNotSetError
+	}
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -107,6 +120,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_AddRequest[fieldId]))
 }
 
 func (p *AddRequest) ReadField1(iprot thrift.TProtocol) error {
@@ -232,8 +247,8 @@ func (p *AddRequest) Field2DeepEqual(src float64) bool {
 }
 
 type SubtractRequest struct {
-	First  float64 `thrift:"first,1" frugal:"1,default,double" json:"first"`
-	Second float64 `thrift:"second,2" frugal:"2,default,double" json:"second"`
+	First  float64 `thrift:"first,1,required" frugal:"1,required,double" json:"first"`
+	Second float64 `thrift:"second,2,required" frugal:"2,required,double" json:"second"`
 }
 
 func NewSubtractRequest() *SubtractRequest {
@@ -267,6 +282,8 @@ func (p *SubtractRequest) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
+	var issetFirst bool = false
+	var issetSecond bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -287,6 +304,7 @@ func (p *SubtractRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetFirst = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -297,6 +315,7 @@ func (p *SubtractRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetSecond = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -316,6 +335,15 @@ func (p *SubtractRequest) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
+	if !issetFirst {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetSecond {
+		fieldId = 2
+		goto RequiredFieldNotSetError
+	}
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -330,6 +358,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_SubtractRequest[fieldId]))
 }
 
 func (p *SubtractRequest) ReadField1(iprot thrift.TProtocol) error {
@@ -455,8 +485,8 @@ func (p *SubtractRequest) Field2DeepEqual(src float64) bool {
 }
 
 type MultiplyRequest struct {
-	First  float64 `thrift:"first,1" frugal:"1,default,double" json:"first"`
-	Second float64 `thrift:"second,2" frugal:"2,default,double" json:"second"`
+	First  float64 `thrift:"first,1,required" frugal:"1,required,double" json:"first"`
+	Second float64 `thrift:"second,2,required" frugal:"2,required,double" json:"second"`
 }
 
 func NewMultiplyRequest() *MultiplyRequest {
@@ -490,6 +520,8 @@ func (p *MultiplyRequest) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
+	var issetFirst bool = false
+	var issetSecond bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -510,6 +542,7 @@ func (p *MultiplyRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetFirst = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -520,6 +553,7 @@ func (p *MultiplyRequest) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetSecond = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -539,6 +573,15 @@ func (p *MultiplyRequest) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
+	if !issetFirst {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetSecond {
+		fieldId = 2
+		goto RequiredFieldNotSetError
+	}
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -553,6 +596,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_MultiplyRequest[fieldId]))
 }
 
 func (p *MultiplyRequest) ReadField1(iprot thrift.TProtocol) error {
