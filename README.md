@@ -133,7 +133,7 @@ kitex -module "github.com/phiphi-tan/orbital-api-gateway" ../idl/[IDL file]
 **Kitex RPC Servers**
 If you would like to generate a server for your RPC server under this directory, run this command under `/backend_RPC_servers`
 ```shell
-kitex -module "github.com/phiphi-tan/orbital-api-gateway/backend_RPC_server" -service [Service Name] ../idl/[IDL file]
+kitex -module "github.com/phiphi-tan/orbital-api-gateway/backend_RPC_server" -service [Service Name] -use ../kitex_gen ../idl/[IDL file]
 ```
 Under run.bat, include a run command for your newly generated RPC server
 ___
