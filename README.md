@@ -94,6 +94,7 @@ ___
 - Parameter Validation
 - Weighted Load Balancer
 ___
+
 **<h2>Curl Commands for Testing</h2>**
 
 Echo:
@@ -122,7 +123,7 @@ Under `/hertz_gateway` run these commands to generate/update hertz scaffolding f
 ```shell
 hz update -module "github.com/phiphi-tan/orbital-api-gateway/hertz_gateway" -idl ../idl/[IDL file]
 ```
-Update handler logic in `hertz_gateway/handler/[Service Name
+Update handler logic in `hertz_gateway/handler/[Service Name]
 
 **Kitex Scaffolding**
 Under the root directory, run these commands to generate kitex code for your IDL
@@ -131,9 +132,9 @@ kitex -module "github.com/phiphi-tan/orbital-api-gateway" ../idl/[IDL file]
 ```
 
 **Kitex RPC Servers**
-If you would like to generate a server for your RPC server under this directory, run this command under `/backend_RPC_servers`
+If you would like to generate a server for your RPC server under this directory, run this command under `/backend_RPC_servers/[Your Server Directory]`
 ```shell
-kitex -module "github.com/phiphi-tan/orbital-api-gateway/backend_RPC_server" -service [Service Name] -use ../kitex_gen ../idl/[IDL file]
+kitex -module "github.com/phiphi-tan/orbital-api-gateway" -service [Service Name] -use ./../../kitex_gen ./../../idl/[IDL file]
 ```
 Under run.bat, include a run command for your newly generated RPC server
 ___
