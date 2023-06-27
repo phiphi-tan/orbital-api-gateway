@@ -10,7 +10,7 @@ import (
 )
 
 type TimeReq struct {
-	Twentyfourhour bool `thrift:"twentyfourhour,1" frugal:"1,default,bool" json:"twentyfourhour"`
+	Twentyfourhour bool `thrift:"twentyfourhour,1,required" frugal:"1,required,bool" json:"twentyfourhour"`
 }
 
 func NewTimeReq() *TimeReq {
@@ -36,6 +36,7 @@ func (p *TimeReq) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
+	var issetTwentyfourhour bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -56,6 +57,7 @@ func (p *TimeReq) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetTwentyfourhour = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -75,6 +77,10 @@ func (p *TimeReq) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
+	if !issetTwentyfourhour {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -89,6 +95,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_TimeReq[fieldId]))
 }
 
 func (p *TimeReq) ReadField1(iprot thrift.TProtocol) error {
@@ -338,7 +346,7 @@ func (p *TimeResp) Field1DeepEqual(src string) bool {
 }
 
 type DateReq struct {
-	AmericanFormatting bool `thrift:"american_formatting,1" frugal:"1,default,bool" json:"american_formatting"`
+	AmericanFormatting bool `thrift:"american_formatting,1,required" frugal:"1,required,bool" json:"american_formatting"`
 }
 
 func NewDateReq() *DateReq {
@@ -364,6 +372,7 @@ func (p *DateReq) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
+	var issetAmericanFormatting bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -384,6 +393,7 @@ func (p *DateReq) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetAmericanFormatting = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -403,6 +413,10 @@ func (p *DateReq) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
+	if !issetAmericanFormatting {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
 	return nil
 ReadStructBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
@@ -417,6 +431,8 @@ ReadFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_DateReq[fieldId]))
 }
 
 func (p *DateReq) ReadField1(iprot thrift.TProtocol) error {
