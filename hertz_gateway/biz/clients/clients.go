@@ -27,7 +27,9 @@ func GenericCall(svc string, method string,
 	//JSON Generic Call
 	jsonbody := string(c.Request.BodyBytes())
 	fmt.Println("Attempting Generic Call")
+	//Not a recursive call, this GenericCall is under the generated clients
 	resp, err := cli.GenericCall(ctx, method, jsonbody)
+	//Might need to add a wakeup call to kitex here
 
 	//Generic call error handling
 	if err != nil {
