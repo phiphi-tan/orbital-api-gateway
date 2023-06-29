@@ -8,15 +8,12 @@ by [Phinehas Tan](https://github.com/phiphi-tan/ "also known as Phi Phi") and [J
 \
 **Deliverables**
 1. Implement an API Gateway that accepts HTTP requests with JSON encoded bodies.
-2. Use the Generic Call feature in Kitex to translate JSON requests into Thrift binary
-format.
-3. Integrate a load balancing mechanism to distribute requests among backend RPC
-servers.
-4. Integrate a service registry and discovery mechanism for the API Gateway and RPC
-servers.
-5. Develop backend RPC servers using Kitex for testing the API Gateway.
-6. Document the project, including design decisions, implementation details, and usage
-instructions.
+2. Implement a mechanism to determine target service and method from HTTP requests
+3. Integrate protocol conversion to thrift binary and forward them to appropriate backend servers
+4. Develop backend RPC servers using Kitex for testing of the API Gateway.
+5. Integrate a service registry and discovery mechanism for the API Gateway and RPC servers.
+6. Establish a mechanism for updating/adding new services/IDLs with ease
+
 ___
 
 **<h2>System Design:</h2>**
