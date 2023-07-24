@@ -3,10 +3,19 @@
 package main
 
 import (
+	"log"
+	"net/http"
+	_ "net/http/pprof"
+
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 
 func main() {
+
+	go func() {
+		log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
+
 	h := server.Default(server.WithHostPorts(":80"))
 
 	register(h)
